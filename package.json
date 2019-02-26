@@ -1,0 +1,24 @@
+{
+  "name": "chatbotbknd",
+  "version": "1.0.0",
+  "description": "Backend for chatbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "server" : "nodemon server.js"
+  },
+  "author": "Surupa Chatterjee",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.15",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
