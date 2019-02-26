@@ -8,7 +8,7 @@ const Well = require('../../models/Wells');
 // @route GET  /api/wells/well
 // @desc  Get well by well details
 // @access Public
-router.get('/well', (req, res) => {
+router.post('/getWell', (req, res) => {
         console.log(req.body);
         Well.findOne(req.body).then(well => {
             console.log(well);
@@ -30,6 +30,7 @@ router.post('/well',(req,res) => {
     });
 
 });
+
 
 
 
