@@ -21,7 +21,7 @@ var fullfillmentMsg = {
 // @access Public
 router.post('/getWell', (req, res) => {
         console.log(req.body.queryResult.parameters);
-        Well.findOne(req.body.queryResult.parameters).then(well => {
+        Well.find(req.body.queryResult.parameters).then(well => {
             console.log(well);
             //fullfillmentMsg.payload = {"fields": well};
             //webHookResp.fulfillment_messages = [fullfillmentMsg];
@@ -29,18 +29,7 @@ router.post('/getWell', (req, res) => {
                 "fulfillmentMessages": [
                     {
                         "payload": {
-                            "well": {
-                                "County": well.County,
-                                "State": well.State,
-                                "SurfaceLongitude": well.SurfaceLongitude,
-                                "WellNum": well.WellNum,
-                                "FieldName": well.FieldName,
-                                "Country": well.Country,
-                                "LeaseName": well.LeaseName,
-                                "SurfaceLatitude": well.SurfaceLatitude,
-                                "CurrentOperatorName": well.CurrentOperatorName,
-                                "CurrentOperatorCity": well.CurrentOperatorCity
-                            }
+                            "wells": well
                         }
                     }
                 ],
