@@ -13,6 +13,7 @@ var webHookResp = {
     "followup_event_input" : ''
 };
 var fullfillmentMsg = {
+    "platform":"PLATFORM_UNSPECIFIED",
     "payload" : {}
 };
 // @route GET  /api/wells/well
