@@ -9,7 +9,7 @@ const Well = require('../../models/Wells');
 // @desc  Get well by well details
 // @access Public
 router.post('/getWell', (req, res) => {
-        console.log(req.body);
+        console.log(req.headers);
         Well.findOne(req.body).then(well => {
             console.log(well);
             res.json(well);
