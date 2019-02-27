@@ -12,6 +12,10 @@ var webHookResp = {
     "output_contexts": [],
     "followup_event_input" : ''
 };
+var fullfillmentMsg = {
+    "platform": "",
+    "payload" : {}
+};
 // @route GET  /api/wells/well
 // @desc  Get well by well details
 // @access Public
@@ -19,7 +23,8 @@ router.post('/getWell', (req, res) => {
         console.log(req.body.queryResult.parameters);
         Well.findOne(req.body.queryResult.parameters).then(well => {
             console.log(well);
-            webHookResp.payload = well;
+            fullfillmentMsg.payload = well;
+            webHookResp.fulfillment_messages = [fullfillmentMsg];
             res.json(webHookResp);
             }
         )
