@@ -21,7 +21,7 @@ var fullfillmentMsg = {
 // @access Public
 router.post('/getWell', (req, res) => {
         console.log(req.body.queryResult.parameters);
-        Well.find(req.body.queryResult.parameters).then(well => {
+        Well.find(req.body.queryResult.parameters).limit(10).then(well => {
             console.log(well);
             //fullfillmentMsg.payload = {"fields": well};
             //webHookResp.fulfillment_messages = [fullfillmentMsg];
