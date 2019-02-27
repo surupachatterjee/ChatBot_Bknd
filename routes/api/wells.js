@@ -10,7 +10,7 @@ const Well = require('../../models/Wells');
 // @access Public
 router.post('/getWell', (req, res) => {
         console.log(req.body.queryResult.parameters);
-        Well.find({'State':req.body.queryResult.parameters.geo-state}).then(well => {
+        Well.findOne({'WellNum':req.body.queryResult.parameters.WellNum}).then(well => {
             console.log(well);
             res.json(well);
             }
