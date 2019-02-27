@@ -23,7 +23,7 @@ router.post('/getWell', (req, res) => {
         console.log(req.body.queryResult.parameters);
         Well.findOne(req.body.queryResult.parameters).then(well => {
             console.log(well);
-            fullfillmentMsg.payload = well;
+            fullfillmentMsg.payload = {"Well": well};
             webHookResp.fulfillment_messages = [fullfillmentMsg];
             res.json(webHookResp);
             }
