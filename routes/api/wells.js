@@ -4,7 +4,14 @@ const router = express.Router();
 
 //Load well model
 const Well = require('../../models/Wells');
-
+var webHookResp = {
+    "fulfillment_text":'web hook response',
+    "fulfillment_messages" : [],
+    "source" : '',
+    "payload" : {},
+    "output_contexts": [],
+    "followup_event_input" : ''
+};
 // @route GET  /api/wells/well
 // @desc  Get well by well details
 // @access Public
@@ -12,7 +19,8 @@ router.post('/getWell', (req, res) => {
         console.log(req.body.queryResult.parameters);
         Well.findOne(req.body.queryResult.parameters).then(well => {
             console.log(well);
-            res.json(well);
+            webHookResp.fulfillment_messages = [well];
+            res.json(webHookResp);
             }
         )
     }
