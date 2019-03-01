@@ -55,9 +55,16 @@ router.post('/well',(req,res) => {
 });
 
 
-
-
-
-
-
+router.post('/email',(req,res) => {
+    const sgMail = require('@sendgrid/mail');
+    sgMail.setApiKey('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');
+    const msg = {
+        to: req.body.emailTo,
+        from: req.body.emailFrom,
+        subject: req.body.emailSubject,
+        text: req.body.emailText,
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+    };
+    sgMail.send(msg);
+})
 module.exports = router;
