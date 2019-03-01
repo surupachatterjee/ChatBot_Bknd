@@ -65,6 +65,6 @@ router.post('/email',(req,res) => {
         text: req.body.emailText,
         html: '<strong>and easy to do anywhere, even with Node.js</strong>',
     };
-    sgMail.send(msg);
+    sgMail.send(msg).then(emailResp => {res.json(emailResp)});
 })
 module.exports = router;
