@@ -58,7 +58,7 @@ router.post('/well',(req,res) => {
 
 
 router.post('/email',(req,res) => {
-    //console.log('APIKey: ' + mailAPIKey);
+    console.log('APIKey: ' + req.body);
     Request.post({
         url: mailApiURL,
         headers: {
