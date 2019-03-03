@@ -1,9 +1,12 @@
 const express = require('express');
+const Request = require("request");
 const router = express.Router();
 
 
 //Load well model
 const Well = require('../../models/Wells');
+const mailAPIKey = require('../../config/keys').mailAPIKey;
+const mailApiURL = 'https://api.sendgrid.com/v3/mail/send';
 var webHookResp = {
     "fulfillment_text":'web hook response',
     "fulfillment_messages" : [],
@@ -34,7 +37,6 @@ router.post('/getWell', (req, res) => {
                     }
                 ],
             }
-
             res.json(response);
             }
         )
@@ -56,15 +58,20 @@ router.post('/well',(req,res) => {
 
 
 router.post('/email',(req,res) => {
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey('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');
-    const msg = {
-        to: req.body.emailTo,
-        from: req.body.emailFrom,
-        subject: req.body.emailSubject,
-        text: req.body.emailText,
-        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-    };
-    sgMail.send(msg).then(emailResp => {res.json(emailResp)});
+    //console.log('APIKey: ' + mailAPIKey);
+    Request.post({
+        url: mailApiURL,
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: mailAPIKey
+        },
+        body: JSON.stringify(req.body)
+    },(error, response, body) => {
+        if (error){
+            console.log(error);
+            res.json(error);
+        }
+        else {res.json(response)}
+    })
 })
 module.exports = router;
