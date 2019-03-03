@@ -7,6 +7,11 @@ const router = express.Router();
 const Well = require('../../models/Wells');
 const mailAPIKey = require('../../config/keys').mailAPIKey;
 const mailApiURL = 'https://api.sendgrid.com/v3/mail/send';
+const accountSid = require('../../config/keys').smsAccountSid;
+const authToken = require('../../config/keys').smsAuthToken;
+const client = require('twilio')(accountSid, authToken);
+
+
 var webHookResp = {
     "fulfillment_text":'web hook response',
     "fulfillment_messages" : [],
@@ -73,5 +78,20 @@ router.post('/email',(req,res) => {
         }
         else {res.json(response)}
     })
+});
+
+router.post('/sms',(req,res) => {
+    console.log(req.body);
+    client.messages
+        .create({
+            body: JSON.stringify(req.body.message),
+            from: '+14153013973',
+            to: req.body.to
+        })
+        .then(message => {
+            console.log(message);
+            res.json(message);
+        });
 })
+
 module.exports = router;
